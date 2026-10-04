@@ -197,9 +197,9 @@ export const LoginView: React.FC<LoginViewProps> = ({
           <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/80 p-6 sm:p-7 relative transition-all">
             
             {/* Header */}
-            <div className="mb-5">
+            <div className="mb-5 text-center">
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-                Welcome Back
+                Login Portal
               </h2>
               <p className="text-xs text-slate-500 mt-1">
                 Sign in to your PRMS portal account

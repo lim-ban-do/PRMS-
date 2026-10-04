@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <!-- Right: White Login Card -->
       <div class="login-card">
-        <h2 class="card-title">Welcome Back</h2>
-        <p class="card-subtitle">Sign in to your account</p>
+        <h2 class="card-title" style="text-align: center;">Login Portal</h2>
+        <p class="card-subtitle" style="text-align: center;">Sign in to your account</p>
 
         <?php if (!empty($error)): ?>
           <div style="background: #ffe4e6; color: #be123c; padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.75rem; margin-bottom: 1rem;">

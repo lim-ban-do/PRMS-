@@ -86,8 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="login-card">
-        <h2 class="card-title">Welcome Back</h2>
-        <p class="card-subtitle">Sign in to your account</p>
+        <h2 class="card-title" style="text-align: center;">Login Portal</h2>
+        <p class="card-subtitle" style="text-align: center;">Sign in to your account</p>
 
         <form method="POST" action="index.php">
           <div class="form-group">

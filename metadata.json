@@ -1,0 +1,6 @@
+{
+  "name": "PRMS — Property Rental Management System",
+  "description": "A web-based Property Rental Management System (PRMS) allowing landlords and property managers to manage properties and tenants, while tenants can view balances and pay rent online.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

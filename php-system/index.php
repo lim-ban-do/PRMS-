@@ -88,13 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         <?php endif; ?>
 
-        <!-- 1-Click Role Tabs -->
-        <div class="role-tabs">
-          <button type="button" class="role-tab active" data-role="admin">Admin</button>
-          <button type="button" class="role-tab" data-role="manager">Manager</button>
-          <button type="button" class="role-tab" data-role="tenant">Tenant</button>
-        </div>
-
         <form method="POST" action="index.php">
           <div class="form-group">
             <label class="form-label" for="login-email">Email Address</label>
@@ -102,20 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
-              <input type="email" id="login-email" name="email" class="form-input" value="admin@demo.com" required placeholder="Enter your email">
+              <input type="email" id="login-email" name="email" class="form-input" value="" required placeholder="Enter your email">
             </div>
           </div>
 
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
               <label class="form-label" for="login-password" style="margin-bottom: 0;">Password</label>
-              <a href="#" onclick="alert('Demo password: Password@123'); return false;" style="font-size: 0.75rem; color: #2563eb; text-decoration: none;">Forgot password?</a>
             </div>
             <div class="input-wrapper">
               <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-              <input type="password" id="login-password" name="password" class="form-input" value="Password@123" required placeholder="Enter your password">
+              <input type="password" id="login-password" name="password" class="form-input" value="" required placeholder="Enter your password">
             </div>
           </div>
 

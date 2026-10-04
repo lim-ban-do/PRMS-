@@ -7,10 +7,7 @@ import {
   Eye, 
   EyeOff, 
   ShieldCheck, 
-  CheckCircle,
-  KeyRound,
   CreditCard,
-  Users,
   AlertCircle
 } from 'lucide-react';
 import { loginHeroImg } from '../initialData';
@@ -27,40 +24,26 @@ export const LoginView: React.FC<LoginViewProps> = ({
   tenants = [],
   users = []
 }) => {
-  const [selectedRole, setSelectedRole] = useState<UserRole>('admin');
-  const [identifier, setIdentifier] = useState('admin@demo.com');
-  const [password, setPassword] = useState('Password@123');
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
   const [loginError, setLoginError] = useState<string | null>(null);
-
-  const handleRoleSelect = (role: UserRole) => {
-    setSelectedRole(role);
-    setLoginError(null);
-    if (role === 'admin') {
-      setIdentifier('admin@demo.com');
-    } else if (role === 'manager') {
-      setIdentifier('manager@demo.com');
-    } else {
-      // Pick first tenant or John
-      const firstTenant = tenants[0];
-      setIdentifier(firstTenant ? firstTenant.email : 'john@demo.com');
-    }
-    setPassword('Password@123');
-  };
-
-  const handleSelectTenant = (t: Tenant) => {
-    setSelectedRole('tenant');
-    setIdentifier(t.email);
-    setPassword('Password@123');
-    setLoginError(null);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError(null);
+
     const cleanInput = identifier.trim().toLowerCase();
     const cleanDigits = identifier.replace(/[^0-9]/g, '');
+
+    if (!cleanInput) {
+      setLoginError('Please enter your email address.');
+      return;
+    }
+    if (!password) {
+      setLoginError('Please enter your password.');
+      return;
+    }
 
     // 1. Admin account check
     if (cleanInput === 'admin@demo.com' || cleanInput === 'admin' || cleanInput === 'admin@prms.local') {
@@ -74,7 +57,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
       return;
     }
 
-    // 3. Search exact tenant across all registered tenants
+    // 3. Search exact tenant across registered tenants
     const matchingTenant = tenants.find((t) => {
       const tEmail = (t.email || '').trim().toLowerCase();
       const tName = (t.name || '').trim().toLowerCase();
@@ -109,16 +92,8 @@ export const LoginView: React.FC<LoginViewProps> = ({
       return;
     }
 
-    // If tenant role was active but nobody matched:
-    if (selectedRole === 'tenant') {
-      setLoginError(
-        `Account "${identifier}" not found. Please click your name below or enter the exact email/phone registered with the property.`
-      );
-      return;
-    }
-
-    // Default fallback
-    onLogin(cleanInput, selectedRole);
+    // Confidential error message — does not reveal account existence
+    setLoginError('Invalid email address or password. Please verify your credentials and try again.');
   };
 
   return (
@@ -206,112 +181,44 @@ export const LoginView: React.FC<LoginViewProps> = ({
             </div>
           </div>
 
-          {/* Social Proof / Trust Footnote */}
+          {/* Security & Access Notice */}
           <div className="pt-3 border-t border-white/10 flex items-center gap-3 text-xs text-slate-400">
-            <div className="flex -space-x-2">
-              <div className="w-6 h-6 rounded-full bg-blue-600 border border-slate-900 flex items-center justify-center text-[10px] font-bold text-white">
-                PM
-              </div>
-              <div className="w-6 h-6 rounded-full bg-emerald-600 border border-slate-900 flex items-center justify-center text-[10px] font-bold text-white">
-                MB
-              </div>
-              <div className="w-6 h-6 rounded-full bg-purple-600 border border-slate-900 flex items-center justify-center text-[10px] font-bold text-white">
-                CT
-              </div>
+            <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5" />
             </div>
             <span className="text-[11px] text-slate-300">
-              Multi-tenant portal with instant tenant account provisioning
+              Authorized access only. Account roles are automatically resolved upon sign-in.
             </span>
           </div>
         </div>
 
-        {/* Right Side: Modern Floating Login Card */}
+        {/* Right Side: Modern Confidential Floating Login Card */}
         <div className="w-full max-w-[390px] shrink-0">
           <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/80 p-6 sm:p-7 relative transition-all">
             
             {/* Header */}
-            <div className="mb-4">
+            <div className="mb-5">
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">
                 Welcome Back
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 mt-1">
                 Sign in to your PRMS portal account
               </p>
             </div>
 
-            {/* Role Switcher Tabs */}
-            <div className="mb-4 p-1 bg-slate-100/90 rounded-xl flex items-center gap-1 border border-slate-200/60">
-              <button
-                type="button"
-                onClick={() => handleRoleSelect('admin')}
-                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  selectedRole === 'admin'
-                    ? 'bg-white text-blue-600 shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Admin
-              </button>
-              <button
-                type="button"
-                onClick={() => handleRoleSelect('manager')}
-                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  selectedRole === 'manager'
-                    ? 'bg-white text-blue-600 shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Manager
-              </button>
-              <button
-                type="button"
-                onClick={() => handleRoleSelect('tenant')}
-                className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  selectedRole === 'tenant'
-                    ? 'bg-emerald-600 text-white shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Tenant ({tenants.length})
-              </button>
-            </div>
-
             {/* Error Banner */}
             {loginError && (
-              <div className="mb-3 p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2">
+              <div className="mb-4 p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0 text-red-600 mt-0.5" />
                 <span>{loginError}</span>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-3.5">
-              {/* Tenant Dropdown Selector when Tenant tab is active */}
-              {selectedRole === 'tenant' && tenants.length > 0 && (
-                <div className="space-y-1.5">
-                  <label className="block text-[11px] font-semibold text-slate-700">
-                    Select Tenant Account:
-                  </label>
-                  <select
-                    value={identifier}
-                    onChange={(e) => {
-                      setIdentifier(e.target.value);
-                      setLoginError(null);
-                    }}
-                    className="w-full px-3 py-2 text-xs bg-emerald-50/50 border border-emerald-300 rounded-xl text-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
-                  >
-                    {tenants.map((t) => (
-                      <option key={t.id} value={t.email}>
-                        👤 {t.name} — {t.propertyName} ({t.email})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
-
-              {/* Email Address or Phone */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Email Address */}
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
-                  {selectedRole === 'tenant' ? 'Or Enter Tenant Email / Phone' : 'Email Address'}
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Email Address
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -322,30 +229,34 @@ export const LoginView: React.FC<LoginViewProps> = ({
                       setIdentifier(e.target.value);
                       setLoginError(null);
                     }}
-                    placeholder={selectedRole === 'tenant' ? 'e.g. email@example.com or 097... / phone' : 'admin@demo.com'}
+                    placeholder="Enter your registered email"
                     required
-                    className="w-full pl-10 pr-3 py-2 text-xs bg-slate-50/80 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 focus:bg-white transition-all font-mono"
+                    autoComplete="email"
+                    className="w-full pl-10 pr-3 py-2.5 text-xs bg-slate-50/80 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-[#0077B6] focus:bg-white transition-all font-sans"
                   />
                 </div>
               </div>
 
               {/* Password */}
               <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-[11px] font-semibold text-slate-700">
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-semibold text-slate-700">
                     Password
                   </label>
-                  <span className="text-[10px] text-slate-400 font-mono">Password@123</span>
                 </div>
                 <div className="relative">
                   <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setLoginError(null);
+                    }}
+                    placeholder="Enter your password"
                     required
-                    className="w-full pl-10 pr-10 py-2 text-xs bg-slate-50/80 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 focus:bg-white transition-all font-mono"
+                    autoComplete="current-password"
+                    className="w-full pl-10 pr-10 py-2.5 text-xs bg-slate-50/80 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-[#0077B6] focus:bg-white transition-all font-sans"
                   />
                   <button
                     type="button"
@@ -358,42 +269,12 @@ export const LoginView: React.FC<LoginViewProps> = ({
                 </div>
               </div>
 
-              {/* Quick Tenant Switcher Chips */}
-              {selectedRole === 'tenant' && tenants.length > 0 && (
-                <div className="pt-1">
-                  <span className="text-[10px] font-semibold text-slate-500 block mb-1">
-                    Quick 1-Click Tenant Sign In:
-                  </span>
-                  <div className="flex flex-wrap gap-1 max-h-24 overflow-y-auto">
-                    {tenants.map((t) => (
-                      <button
-                        key={t.id}
-                        type="button"
-                        onClick={() => handleSelectTenant(t)}
-                        className={`px-2 py-1 rounded-md text-[10px] font-semibold border transition-all cursor-pointer ${
-                          identifier.toLowerCase() === t.email.toLowerCase()
-                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                        }`}
-                        title={`${t.name} (${t.email} - ${t.propertyName})`}
-                      >
-                        👤 {t.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Login Button */}
+              {/* Submit Button */}
               <button
                 type="submit"
-                className={`w-full py-2.5 px-4 text-white font-semibold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.99] mt-3 ${
-                  selectedRole === 'tenant'
-                    ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/30'
-                    : 'bg-blue-600 hover:bg-blue-700 shadow-blue-600/30'
-                }`}
+                className="w-full py-2.5 px-4 text-white font-semibold text-xs rounded-xl shadow-md bg-[#0077B6] hover:bg-[#006094] shadow-sky-600/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.99] mt-4"
               >
-                <span>Sign In as {selectedRole === 'tenant' ? 'Tenant' : selectedRole === 'manager' ? 'Property Manager' : 'Administrator'}</span>
+                <span>Sign In</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </form>

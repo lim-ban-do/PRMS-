@@ -4,29 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Quick Role Selector on Login Page
-  const roleTabs = document.querySelectorAll('.role-tab');
-  const emailInput = document.getElementById('login-email');
   const passwordInput = document.getElementById('login-password');
-
-  if (roleTabs.length && emailInput && passwordInput) {
-    roleTabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        roleTabs.forEach((t) => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        const role = tab.getAttribute('data-role');
-        if (role === 'admin') {
-          emailInput.value = 'admin@demo.com';
-        } else if (role === 'manager') {
-          emailInput.value = 'manager@demo.com';
-        } else if (role === 'tenant') {
-          emailInput.value = 'john@demo.com';
-        }
-        passwordInput.value = 'Password@123';
-      });
-    });
-  }
 
   // Password visibility toggle
   const togglePassBtn = document.getElementById('toggle-password');

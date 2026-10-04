@@ -63,13 +63,22 @@ PRMS/
 
 ---
 
-## 3. Demo Credentials
+## 3. Confidential Login Credentials
 
-| Role | Email | Password |
-|---|---|---|
-| **Admin** | `admin@demo.com` (or `admin@prms.local`) | `Password@123` |
-| **Property Manager** | `manager@demo.com` (or `manager@prms.local`) | `Password@123` |
-| **Tenant** | `john@demo.com` (or `tenant@prms.local`) | `Password@123` |
+> **Notice**: To preserve user confidentiality, user accounts and role selectors are **not** displayed on the public login form. All accounts sign in through the same unified portal, and roles (**Administrator**, **Property Manager**, or **Tenant**) are automatically detected and differentiated by the entered email address.
+
+### Available System Credentials
+
+| Role | Name | Email Address | Password | Assigned Unit / Scope |
+|---|---|---|---|---|
+| **Administrator** | System Admin | `admin@demo.com` | `Password@123` | Full System Management & Oversight |
+| **Property Manager** | Sarah Mwamba | `manager@demo.com` | `Password@123` | Operations Desk & Maintenance |
+| **Tenant 1** | John Mwale | `john@demo.com` | `Password@123` | Chalala House — Unit 04 |
+| **Tenant 2** | Mary Banda | `mary@demo.com` | `Password@123` | Sunset Apartments — Unit 02 |
+| **Tenant 3** | Chris Tembo | `chris@demo.com` | `Password@123` | Riverside Flats — Unit 01 |
+| **Tenant 4** | Patricia Ndlovu | `patricia@demo.com` | `Password@123` | Garden Villas — Unit 03 |
+
+> Alternative local alias emails (e.g. `admin@prms.local`, `manager@prms.local`, `tenant@prms.local`) and tenant phone numbers (e.g. `0978123456`) are also supported for signing in.
 
 ---
 

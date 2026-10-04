@@ -89,27 +89,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2 class="card-title">Welcome Back</h2>
         <p class="card-subtitle">Sign in to your account</p>
 
-        <div class="role-tabs">
-          <button type="button" class="role-tab active" data-role="admin">Admin</button>
-          <button type="button" class="role-tab" data-role="manager">Manager</button>
-          <button type="button" class="role-tab" data-role="tenant">Tenant</button>
-        </div>
-
         <form method="POST" action="index.php">
           <div class="form-group">
             <label class="form-label" for="login-email">Email Address</label>
-            <input type="email" id="login-email" name="email" class="form-input" value="admin@demo.com" required>
+            <input type="email" id="login-email" name="email" class="form-input" placeholder="Enter your email" required>
           </div>
 
           <div class="form-group">
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <label class="form-label" for="login-password">Password</label>
-              <a href="#" onclick="alert('Password: Password@123'); return false;" style="font-size:0.75rem;color:#2563eb;text-decoration:none;">Forgot password?</a>
             </div>
-            <input type="password" id="login-password" name="password" class="form-input" value="Password@123" required>
+            <input type="password" id="login-password" name="password" class="form-input" placeholder="Enter your password" required>
           </div>
 
-          <button type="submit" class="btn-primary"><span>Login</span></button>
+          <button type="submit" class="btn-primary"><span>Sign In</span></button>
         </form>
       </div>
     </div>
@@ -442,28 +435,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-
  * PRMS — Pure JavaScript Application Interactions
  */
 document.addEventListener('DOMContentLoaded', () => {
-  const roleTabs = document.querySelectorAll('.role-tab');
-  const emailInput = document.getElementById('login-email');
-  const passwordInput = document.getElementById('login-password');
-
-  if (roleTabs.length && emailInput && passwordInput) {
-    roleTabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        roleTabs.forEach((t) => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        const role = tab.getAttribute('data-role');
-        if (role === 'admin') {
-          emailInput.value = 'admin@demo.com';
-        } else if (role === 'manager') {
-          emailInput.value = 'manager@demo.com';
-        } else if (role === 'tenant') {
-          emailInput.value = 'john@demo.com';
-        }
-        passwordInput.value = 'Password@123';
-      });
-    });
-  }
+  // Universal login: user role is differentiated automatically by email upon submission
 });`
     },
 

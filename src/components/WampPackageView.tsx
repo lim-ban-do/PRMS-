@@ -301,7 +301,7 @@ $user = $_SESSION['user'];
       <ul class="nav-menu">
         <li><a href="dashboard.php" class="nav-link active">Dashboard</a></li>
         <li><a href="pay-rent.php" class="nav-link">Rent Payment</a></li>
-        <li><a href="index.php" class="nav-link" style="color:#f87171;">Logout</a></li>
+        <li><a href="index.php" class="nav-link">Logout</a></li>
       </ul>
     </aside>
 
@@ -425,10 +425,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-
 .form-input:focus { background: #fff; border-color: #2563eb; }
 .btn-primary { width: 100%; padding: 0.65rem 1rem; font-size: 0.8rem; font-weight: 700; color: #fff; background: #2563eb; border: none; border-radius: 0.65rem; cursor: pointer; }
 .app-layout { display: flex; min-height: 100vh; }
-.sidebar { width: 250px; background: #0f172a; color: #fff; padding: 1.5rem; }
+.sidebar { width: 250px; background: #0077B6; color: #fff; padding: 1.5rem; }
 .nav-menu { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
-.nav-link { color: #94a3b8; text-decoration: none; padding: 0.5rem; display: block; border-radius: 0.5rem; }
-.nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.1); color: #fff; }
+.nav-link { color: #fff; text-decoration: none; padding: 0.5rem; display: block; border-radius: 0.5rem; transition: all 0.15s ease; }
+.nav-link:hover, .nav-link.active { background: #fff; color: #0077B6; font-weight: 600; }
 .main-content { flex: 1; padding: 2rem; }
 .card { background: #fff; border-radius: 1rem; border: 1px solid var(--border); padding: 1.5rem; }
 .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.5rem; }

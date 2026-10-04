@@ -42,7 +42,9 @@ header('Content-Type: text/html; charset=utf-8');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f8fafc; }
-        .sidebar { background-color: #0f172a; min-height: 100vh; color: #94a3b8; }
+        .sidebar { background-color: #0077B6; min-height: 100vh; color: #ffffff; }
+        .sidebar .nav-link { color: #ffffff !important; transition: all 0.15s ease; border-radius: 0.5rem; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { background-color: #ffffff !important; color: #0077B6 !important; font-weight: 600; }
         .btn-pay { background-color: #059669; color: #fff; font-weight: 700; }
         .btn-pay:hover { background-color: #047857; color: #fff; }
     </style>
@@ -55,17 +57,17 @@ header('Content-Type: text/html; charset=utf-8');
                 <div class="bg-primary rounded p-1.5 fw-bold">PRMS</div>
                 <div>
                     <h6 class="mb-0 fw-bold">PRMS</h6>
-                    <small class="text-secondary">WAMP PHP 8+</small>
+                    <small class="text-white-50">WAMP PHP 8+</small>
                 </div>
             </div>
             <ul class="nav nav-pills flex-column gap-1">
                 <li class="nav-item"><a href="?action=dashboard" class="nav-link active">Dashboard</a></li>
-                <li class="nav-item"><a href="?action=properties" class="nav-link text-light">Properties</a></li>
-                <li class="nav-item"><a href="?action=tenants" class="nav-link text-light">Tenants</a></li>
-                <li class="nav-item"><a href="?action=leases" class="nav-link text-light">Leases</a></li>
-                <li class="nav-item"><a href="?action=payments" class="nav-link text-light">Payments</a></li>
-                <li class="nav-item"><a href="?action=maintenance" class="nav-link text-light">Maintenance</a></li>
-                <li class="nav-item"><a href="?action=reports" class="nav-link text-light">Reports</a></li>
+                <li class="nav-item"><a href="?action=properties" class="nav-link">Properties</a></li>
+                <li class="nav-item"><a href="?action=tenants" class="nav-link">Tenants</a></li>
+                <li class="nav-item"><a href="?action=leases" class="nav-link">Leases</a></li>
+                <li class="nav-item"><a href="?action=payments" class="nav-link">Payments</a></li>
+                <li class="nav-item"><a href="?action=maintenance" class="nav-link">Maintenance</a></li>
+                <li class="nav-item"><a href="?action=reports" class="nav-link">Reports</a></li>
             </ul>
         </div>
 

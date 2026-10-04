@@ -54,7 +54,7 @@ $user = $_SESSION['user'];
         <li><a href="leases.php" class="nav-link">Leases</a></li>
         <li><a href="reports.php" class="nav-link">Reports</a></li>
         <li><a href="users.php" class="nav-link">Users</a></li>
-        <li style="margin-top: auto;"><a href="index.php" class="nav-link" style="color: #f87171;">Logout</a></li>
+        <li style="margin-top: auto;"><a href="index.php" class="nav-link">Logout</a></li>
       </ul>
     </aside>
 

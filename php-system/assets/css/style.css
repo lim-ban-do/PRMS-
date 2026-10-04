@@ -280,7 +280,7 @@ body {
 
 .sidebar {
   width: 260px;
-  background-color: #0f172a;
+  background-color: #0077B6;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -289,10 +289,18 @@ body {
 
 .sidebar-header {
   padding: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.sidebar-header strong {
+  color: #ffffff;
+}
+
+.sidebar-header span {
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .nav-menu {
@@ -310,15 +318,20 @@ body {
   padding: 0.65rem 0.85rem;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #94a3b8;
+  color: #ffffff;
   text-decoration: none;
   border-radius: 0.5rem;
   transition: all 0.15s ease;
 }
 
 .nav-link:hover, .nav-link.active {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background-color: #ffffff !important;
+  color: #0077B6 !important;
+  font-weight: 600;
+}
+
+.nav-link:hover svg, .nav-link.active svg {
+  stroke: #0077B6 !important;
 }
 
 .main-content {

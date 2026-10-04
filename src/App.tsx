@@ -75,7 +75,7 @@ const saveStorage = <T,>(key: string, value: T) => {
 
 export default function App() {
   // Authentication & Persona State
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [users, setUsers] = useState<User[]>(() => loadStorage('users', INITIAL_USERS));
   const [currentUser, setCurrentUser] = useState<User>(() => {
